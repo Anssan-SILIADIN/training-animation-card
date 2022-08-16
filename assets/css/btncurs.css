@@ -1,0 +1,64 @@
+body{
+margin: 0;
+padding: 0;
+height: 100vh;
+background: #1b1b1b;
+cursor: none; /* dès qu'on va passer la souris dessus la souri va disparaitre*/
+overflow:hidden;
+
+}
+
+.cursor{
+width: 40px;
+height: 40px;
+border: 1px dashed aqua;/*bordure en pointillés de couleur aqua*/
+border-radius: 50%;
+position: absolute;
+animation: Anim1 1s infinite alternate; /* alternate pour que quand l'animation fini elle va en avant, en arrière*/
+
+}
+/*pour avoir un pointeur au milieu du cercle on va mettre ceci*/
+.cursor::before {
+    content: '';
+    position: absolute; 
+    top: 50%;  /*pour le placer au milieu du cercle qu'on a créer on ajoute un top et un left 50% chacun*/
+    left: 50%;
+    transform: translate(-50%, -50%); /* -50% Sur X et -50% sur Y*/
+    width: 5px;
+    height: 5px;
+    background: fuchsia;
+    border-radius: 50%;
+}
+
+/* cet animation sera ajouter avec javascript*/
+.expand { /* pour que quand on clique le point rouge grossisse*/
+animation:Anim2 .5s;
+background: pink; /* mais ce n'est pas le point
+ rouge qui va grossir c'est le cercle qui prend
+  de la couleur et du on ne vois plus les pointillers*/
+border: 1px solid aqua; /* pour faire disparaitre les pointillers et obetenir une bordure unie*/
+
+}
+
+@keyframes Anim1 {
+    from {
+        transform: scale(1) rotate(0deg); /* ça part d'un taille normal*/
+    }
+    to {
+transform: scale(0.7) rotate(90deg);/* ici ça va rétrécir jusqu'a 0.7 et en faisant une rotation de 90° et ça dur 1s*/
+    }
+}
+
+@keyframes Anim2 {
+    0%{
+     transform: scale(1);   
+    }
+    50%{/*le bouton doit grossir à l'échelle 2*/
+        transform: scale(2); /* comme l'animation dur 0.5s l'échelle doit être multiplier par 2 ce qui va nous donner 0.25s*/
+    }
+
+    100%{
+        transform: scale(1);  /* on veut qu'il revienne à sa taille normale original*/ 
+        opacity:0;
+       }  
+}
